@@ -1,9 +1,10 @@
-name: CI
+name: CI - Socket Server
 
 # Controls when the action will run. 
 on:
   # Triggers the workflow on push or pull request events but only for the master branch
   push:
+    branches: [ master ]
     paths:
     - 'Socket_Server/**'
 
@@ -32,8 +33,8 @@ jobs:
 
       - name: Build and push Docker images
         uses: docker/build-push-action@v2
-        working-directory: ./Socket_Server
         with:
+          context: ./Socket_Server
           push: true 
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/lights_backend:${{ github.run_id }}
 
@@ -41,17 +42,15 @@ jobs:
       # replaceing tokens in kube yaml
       - name: Replace tokens
         uses: cschleiden/replace-tokens@v1.0
-        working-directory: ./Socket_Server
         with:
-          files: kube.yaml
+          files: ./Socket_Server/kube.yaml
         env:
           deployment.image.name: ${{ secrets.DOCKERHUB_USERNAME }}/lights_backend:${{ github.run_id }}
 
       - name: Deploy
         uses: danielr1996/kubectl-action@1.0.0
-        working-directory: ./Socket_Server
         with:
           kubeconfig: ${{ secrets.KUBE_CONFIG_DATA }}
-          args: apply -f kube.yaml
+          args: apply -f ./Socket_Server/kube.yaml
     
     
