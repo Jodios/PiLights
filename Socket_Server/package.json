@@ -1,0 +1,16 @@
+{
+  "name": "lights-backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "SocketServer.js",
+  "scripts": {
+    "start": "node src/SocketServer.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Joel Ortiz",
+  "license": "GPL-3.0",
+  "dependencies": {
+    "express": "^4.17.1",
+    "ws": "^7.4.4"
+  }
+}
