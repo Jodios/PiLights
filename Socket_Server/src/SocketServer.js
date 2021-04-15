@@ -17,7 +17,7 @@ socketServer.on('connection', (socket) => {
 
     socket.send(JSON.stringify(status));
 
-    console.log(`${socket} connected. ${socketServer.clients.size} clients currently connected`);
+    console.log(`${socket} connected. ${socketServer.clients.size} clients currently connected.`);
 
     socket.on('close', () => { console.log(`${socket} disconnected.`) });
 
