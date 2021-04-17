@@ -7,7 +7,7 @@ import commands from './Commands';
 import axios from 'axios';
 
 
-const url = "ws://192.53.165.83:30421/ws";
+const url = "ws://198.58.106.47:30421/ws";
 // const url = "ws://localhost:8080/ws";
 const options = { constructor: Html5WebSocket };
 var socketClient = undefined;
