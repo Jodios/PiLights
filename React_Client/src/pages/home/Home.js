@@ -7,8 +7,8 @@ import commands from './Commands';
 import axios from 'axios';
 
 
-const url = "ws://198.58.106.47:30421/ws";
-// const url = "ws://localhost:8080/ws";
+// const url = "ws://198.58.106.47:30421/ws";
+const url = "ws://localhost:8080/ws";
 const options = { constructor: Html5WebSocket };
 var socketClient = undefined;
 
@@ -23,7 +23,8 @@ export default class Home extends React.Component {
     modified_ip: "0.0.0.0",
     modified_state: "TX",
     modified_city: "Dallas",
-    compliment: "hsl(0,0%,0%)"
+    compliment: "hsl(0,0%,0%)",
+    text_color: "hsl(120,1,65)"
   };
 
   async componentDidMount() {
@@ -82,12 +83,15 @@ export default class Home extends React.Component {
     };
     socketClient.send(JSON.stringify(message))
     let h = (color.hsl.h + 180) % 360;
+    let lightness = ( ( color.hsl.l  * 100) + 30 )% 100;
+    let textColor = `hsl(158,100%,${lightness}%)`
     this.setState({
       background: color.hex, status: `Color: ${color.hex}`,
       modified_ip: this.state.current_ip,
       modified_city: this.state.current_city,
       modified_state: this.state.current_state,
-      compliment: `hsl(${h},${color.hsl.s * 100}%,${color.hsl.l * 100}%)`
+      compliment: `hsl(${h},${color.hsl.s * 100}%,${color.hsl.l * 100}%)`,
+      text_color: textColor
     });
   };
 
@@ -110,7 +114,7 @@ export default class Home extends React.Component {
   render() {
     return (
       <div>
-        <div className="header" sticky="top" style={{ backgroundColor: this.state.background }}>
+        <div className="header" sticky="top" style={{ backgroundColor: this.state.background, color: this.state.text_color }}>
           <h1>{this.state.status}</h1>
           <p>{this.state.current_ip}</p>
         </div>
@@ -120,7 +124,7 @@ export default class Home extends React.Component {
             {commands.map(command => {
               return (
                 <div key={command.command}>
-                  <button style={{backgroundColor: this.state.background}} className="command" onClick={() => { this.command(command.command); }}>{command.name}</button><br />
+                  <button style={{backgroundColor: this.state.background, color: this.state.text_color}} className="command" onClick={() => { this.command(command.command); }}>{command.name}</button><br />
                 </div>
               )
             })}
@@ -135,8 +139,8 @@ export default class Home extends React.Component {
           </div>
         </div>
 
-        <div className="footer" sticky="bottom" style={{ backgroundColor: this.state.background }}>
-          <p>{`Last edited by: ${this.state.modified_ip} in ${this.state.modified_city}, ${this.state.modified_state}`}</p>
+        <div className="footer" sticky="bottom" style={{ backgroundColor: this.state.background}}>
+          <p style={{ color: this.state.text_color }}>{`Last edited by: ${this.state.modified_ip} in ${this.state.modified_city}, ${this.state.modified_state}`}</p>
         </div>
 
       </div>
