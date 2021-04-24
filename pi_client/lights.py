@@ -39,7 +39,7 @@ def on_message(ws, message):
         elif data['command'] == "random":
             randomize()
         else:
-            process = run("python3 /home/pi/lights/commands/"+data['command']+".py")
+            process = run("python3 /home/pi/pilights/pi_client/commands/"+data['command']+".py")
     if 'color' in data:
         fillColorString( data['color'] )
 
