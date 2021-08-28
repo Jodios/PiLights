@@ -2,7 +2,7 @@ import websocket, json, subprocess, shlex, time
 from sys import argv
 from commands.setup import clear, allWhite, fillColorString, randomize
 
-url = "ws://198.58.106.47:30421/ws"
+url = "ws://173.255.202.70:30421/ws"
 process = None
 stdOutputHandle = open("LightsLogs.txt", "a");
 errOutputHandle = open("LightsErrorLogs.txt", "a");
