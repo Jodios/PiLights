@@ -36,7 +36,7 @@ jobs:
         with:
           context: ./Socket_Server
           push: true 
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/lights_backend:${{ github.run_id }}
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/lights_backend:${{ github.run_id }},${{ secrets.DOCKERHUB_USERNAME }}/lights_backend:latest
 
 
       # replaceing tokens in kube yaml
@@ -45,7 +45,7 @@ jobs:
         with:
           files: ./Socket_Server/kube.yaml
         env:
-          deployment.image.name: ${{ secrets.DOCKERHUB_USERNAME }}/lights_backend:${{ github.run_id }}
+          deployment.image.name: ${{ secrets.DOCKERHUB_USERNAME }}/lights_backend:latest
 
       - name: Deploy
         uses: danielr1996/kubectl-action@1.0.0
