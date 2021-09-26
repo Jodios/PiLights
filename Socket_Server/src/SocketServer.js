@@ -9,14 +9,7 @@ var status = {
 }
 
 
-const app = express();
-app.get("/", (req, res) => {
-    let response = {
-        "status": "UP" 
-    };
-    res.send(response)
-});
-app.listen(port, () => {
+const app = express().listen(port, () => {
     console.log(`Server started on port ${port}`);
 });
 
