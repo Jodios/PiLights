@@ -37,7 +37,7 @@ jobs:
         with:
           context: ./React_Client
           push: true 
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/lights_frontend:${{ github.run_id }}
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/lights_frontend:${{ github.run_id }},${{ secrets.DOCKERHUB_USERNAME }}/lights_frontend:latest
 
 
       # replaceing tokens in kube yaml

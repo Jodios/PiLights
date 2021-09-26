@@ -45,7 +45,7 @@ jobs:
         with:
           files: ./Socket_Server/kube.yaml
         env:
-          deployment.image.name: ${{ secrets.DOCKERHUB_USERNAME }}/lights_backend:latest
+          deployment.image.name: ${{ secrets.DOCKERHUB_USERNAME }}/lights_backend:${{ github.run_id }}
 
       - name: Deploy
         uses: danielr1996/kubectl-action@1.0.0

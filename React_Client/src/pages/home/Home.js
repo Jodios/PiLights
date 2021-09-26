@@ -7,7 +7,7 @@ import commands from './Commands';
 import axios from 'axios';
 
 
-const url = "ws://173.255.202.70:30421/ws";
+const url = "wss://lights-socket.jodios.com/ws";
 // const url = "ws://localhost:8080/ws";
 const options = { constructor: Html5WebSocket };
 var socketClient = undefined;
@@ -36,8 +36,8 @@ export default class Home extends React.Component {
     });
     this.setState({ current_city: ipInfo.city, current_ip: ipInfo.ip, current_state: ipInfo.region_code });
 
-    // this.setState({ip: await publicIP.v4() || ""});
-    socketClient = new ReconnectingWebSocket(url, undefined, options);
+    socketClient = new ReconnectingWebSocket(url, "ws", options);
+    console.log("Connecting to client") 
     socketClient.timeout = 1000;
 
     socketClient.addEventListener('open', () => {
@@ -52,7 +52,7 @@ export default class Home extends React.Component {
       if (error.code === 'EHOSTDOWN') {
         console.log('Error: server down');
       }
-      console.log(error);
+      console.log(`Error:\n${error}`);
     };
 
     socketClient.addEventListener('message', (message) => {
