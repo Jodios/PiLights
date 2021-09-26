@@ -11,6 +11,11 @@
   margin-right: 10px;
 }
 
+.connecting{
+  text-align: center;
+  color: white;
+}
+
 .command:hover {
   background-color: #57c4e2;
   transition-duration: 300ms;

@@ -5,7 +5,7 @@ import ReconnectingWebSocket from 'reconnecting-websocket';
 import { SketchPicker } from 'react-color';
 import commands from './Commands';
 import axios from 'axios';
-
+import connection_animation from "../../resources/connecting.gif"; 
 
 const url = "wss://lights-socket.jodios.com/ws";
 // const url = "ws://localhost:8080/ws";
@@ -15,7 +15,8 @@ var socketClient = undefined;
 export default class Home extends React.Component {
 
   state = {
-    background: '#fff',
+    connected: false, 
+    background: '##1d1f21',
     status: "command",
     current_ip: "0.0.0.0",
     current_state: "TX",
@@ -37,15 +38,16 @@ export default class Home extends React.Component {
     this.setState({ current_city: ipInfo.city, current_ip: ipInfo.ip, current_state: ipInfo.region_code });
 
     socketClient = new ReconnectingWebSocket(url, "ws", options);
-    console.log("Connecting to client") 
     socketClient.timeout = 1000;
 
     socketClient.addEventListener('open', () => {
       console.log('Connection to server established');
+      this.setState({connected: true});
     });
 
     socketClient.addEventListener('close', () => {
       console.log('Connection closed');
+      this.setState({connected: false});
     });
 
     socketClient.onerror = (error) => {
@@ -112,13 +114,11 @@ export default class Home extends React.Component {
   }
 
   render() {
-    return (
-      <div>
-        <div className="header" sticky="top" style={{ backgroundColor: this.state.background, color: this.state.text_color }}>
-          <h1>{this.state.status}</h1>
-          <p>{this.state.current_ip}</p>
-        </div>
-
+    let main = !this.state.connected ? 
+        <div className="connecting">
+          <img src={connection_animation}/>
+        </div> 
+        :
         <div className="wrapper">
           <div className="left">
             {commands.map(command => {
@@ -139,6 +139,13 @@ export default class Home extends React.Component {
           </div>
         </div>
 
+return (
+      <div>
+        <div className="header" sticky="top" style={{ backgroundColor: this.state.background, color: this.state.text_color }}>
+          <h1>{this.state.status}</h1>
+          <p>{this.state.current_ip}</p>
+        </div>
+        {main} 
         <div className="footer" sticky="bottom" style={{ backgroundColor: this.state.background}}>
           <p style={{ color: this.state.text_color }}>{`Last edited by: ${this.state.modified_ip} in ${this.state.modified_city}, ${this.state.modified_state}`}</p>
         </div>
