@@ -27,3 +27,4 @@ ingress.yml
 
 pi_client/*.txt
 __pycache__
+firebase-config.js

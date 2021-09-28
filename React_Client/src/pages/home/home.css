@@ -1,5 +1,5 @@
 /* #61dafb colour for buttons? */
-.command {
+.home_command {
   margin-bottom: 10px;
   background-color: #00c8ff;
   border: none;
@@ -11,30 +11,31 @@
   margin-right: 10px;
 }
 
-.connecting{
+.home_connecting{
   text-align: center;
   color: white;
+  width: 100%;
 }
 
-.command:hover {
+.home_command:hover {
   background-color: #57c4e2;
   transition-duration: 300ms;
   cursor: pointer;
 }
 
-.wrapper {
+.home_wrapper {
   top: 20%;
   display: grid;
   width: 100%;
   grid-template-columns: 50% 50%;
 }
-.left {
+.home_left {
   /* text-align: right; */
 }
-.right {
+.home_right {
 }
 
-.header {
+.home_header {
   margin-bottom: 10px;
   /* border: solid black; */
   width: 100%;
@@ -43,7 +44,7 @@
   color: #adb1af;
 }
 
-.footer {
+.home_footer {
   position: absolute;
   bottom: 0px;
   color: #b294bb;
@@ -52,11 +53,14 @@
 }
 
 @media (max-width: 800px) {
-  .wrapper {
+  .home_wrapper {
     grid-template-columns: 35% 65%;
   }
-  .command{
+  .home_command{
       float: none;
       width: 98%;
+  }
+  .home_connecting_animation{
+    width: 100%;
   }
 }

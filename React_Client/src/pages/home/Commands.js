@@ -7,6 +7,7 @@ const commands = [
     {command: "cops", name: "Cops"},
     {command: "cops2", name: "Cops 2"},
     {command: "on", name: "On"},
-    {command: "off", name: "Off"}
+    {command: "off", name: "Off"},
+    {command: "logout", name: "Logout"}
 ]
 export default commands;
