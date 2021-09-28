@@ -33,7 +33,7 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
       - name: Write firebase config
-        run: echo ${{secrets.FIREBASE_CONFIG}} >> ./React_Client/src/firebase-config.js
+        run: echo "${{secrets.FIREBASE_CONFIG}}" >> ./React_Client/src/firebase-config.js
 
       - name: Build and push Docker images
         uses: docker/build-push-action@v2
