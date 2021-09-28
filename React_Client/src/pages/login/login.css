@@ -1,0 +1,8 @@
+.login_wrapper{
+	display: grid;
+	grid-template-columns: 25% 50% 25%;
+}
+.login_icon{
+	width: 80%;
+	cursor: pointer;
+}

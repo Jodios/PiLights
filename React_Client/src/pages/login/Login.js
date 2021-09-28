@@ -1,39 +1,41 @@
-import React from "react";
+import React from 'react';
+import {Redirect} from 'react-router-dom';
+import { FirebaseAuthConsumer } from "@react-firebase/auth";
+import firebase from 'firebase/compat';
+import google_login from '../../resources/google-login.png';
+import './login.css';
 
 export default class Login extends React.Component {
 
-	onSubmit = () => {
+	login = () => {
+		firebase.auth().signInWithPopup(new firebase.auth.GoogleAuthProvider());
+	}
 
+	logout = () => {
+		firebase.auth().signOut();
 	}
 
 	render() {
 		return (
-			<div>LOGIN PAGE...</div>
-			// <div id="login">
-			// 	<form className="login-form" onSubmit={this.onSubmit}>
-			// 		<span className="fa fa-user"></span>
-			// 		<input
-			// 			autoFocus
-			// 			maxLength="25"
-			// 			// onChange={this.handleChange.bind(this, 'email')}
-			// 			placeholder="Email"
-			// 			type="email"
-			// 			value={this.state.user.email}
-			// 			required
-			// 		/>
-			// 		<span className="fa fa-lock"></span>
-			// 		<input
-			// 			autoComplete="off"
-			// 			maxLength="8"
-			// 			// onChange={this.handleChange.bind(this, 'password')}
-			// 			placeholder="Password"
-			// 			type="password"
-			// 			value={this.state.user.password}
-			// 			required
-			// 		/>
-			// 		<input type="submit" value="Log in" />
-			// 	</form>
-			// </div>
+			<FirebaseAuthConsumer>
+				{({ user, firebase, providerId, isSignedIn }) => {
+					if (isSignedIn) {
+						return (
+							<Redirect to={{pathname: "/home", state: {name: user.displayName}}}/>
+						)
+					}
+					return (
+						<div className="login_wrapper">
+							<div className="login_left"></div>
+							<div className="login_main">
+								<img className="login_icon" src={google_login} onClick={() => this.login()} />
+								<h1>Please login</h1>
+							</div>
+							<div className="login_right"></div>
+						</div>
+					)
+				}}
+			</FirebaseAuthConsumer>
 		);
 	}
 
