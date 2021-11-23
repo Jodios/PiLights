@@ -53,6 +53,7 @@ func socketHandler(w http.ResponseWriter, r *http.Request) {
 	}
 	log.Println("Client Connected...")
 	defer conn.Close()
+	conn.WriteJSON(status)
 	connections[conn] = len(connections) + 1
 	for {
 		_, message, err := conn.ReadMessage()
