@@ -51,7 +51,7 @@ def on_message(ws, message):
         else:
             process = run(
                 "python3 /home/pi/pilights/pi_client/commands/"+data['command']+".py")
-    if 'color' in data:
+    if 'color' in data and data['color'] != "":
         fillColorString(data['color'])
 
 

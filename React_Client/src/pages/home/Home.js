@@ -59,7 +59,7 @@ export default class Home extends React.Component {
       if (error.code === 'EHOSTDOWN') {
         console.log('Error: server down');
       }
-      console.log(`Error:\n${error}`);
+      console.log(`Error:\n${error.message}`);
     };
 
     socketClient.addEventListener('message', (message) => {
