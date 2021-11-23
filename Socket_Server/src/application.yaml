@@ -1,3 +1,4 @@
 domain_whitelist:
     - ".*//localhost.*"
     - "https://lights.jodios.com.*"
+    - ".*://lights-socket.jodios.com.*"
