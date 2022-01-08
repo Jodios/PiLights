@@ -10,7 +10,7 @@ import axios from 'axios';
 import connection_animation from "../../resources/connecting.gif";
 import { FirebaseAuthConsumer } from '@react-firebase/auth';
 
-const url = "wss://lights-socket.jodios.com/ws";
+const url = "wss://lights-socket.jodios.com/ws/";
 // const url = "ws://localhost:8080/ws";
 const options = { constructor: Html5WebSocket };
 var socketClient = undefined;
