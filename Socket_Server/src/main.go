@@ -29,7 +29,7 @@ func main() {
 		log.Fatal("Couldn't load application context...", err)
 	}
 	log.Println(config)
-	http.HandleFunc("/ws", socketHandler)
+	http.HandleFunc("/ws/", socketHandler)
 	log.Fatal(http.ListenAndServe(port, nil))
 }
 func checkOrigin(r *http.Request) bool {
