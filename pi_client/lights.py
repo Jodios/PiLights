@@ -6,7 +6,7 @@ import time
 from sys import argv
 from commands.setup import clear, allWhite, fillColorString, randomize
 
-url = "wss://lights-socket.jodios.com/ws"
+url = "wss://lights-socket.jodios.com/ws/"
 process = None
 stdOutputHandle = open("LightsLogs.txt", "a")
 errOutputHandle = open("LightsErrorLogs.txt", "a")
